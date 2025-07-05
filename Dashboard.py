@@ -10,7 +10,8 @@ dados_sensor = pd.read_csv('sensor_data.csv', encoding='latin1')
 if not pd.api.types.is_datetime64_any_dtype(dados_sensor['Data e Hora']):
     dados_sensor['Data e Hora'] = pd.to_datetime(dados_sensor['Data e Hora'], errors='coerce')
 
-st.title('Mapaemaento de agrimenssura')
+st.title('Mapeamento de Agrimensura')
+st.subheader('Por Diter Wiese e Lucas A. Dalsenter')
 # Filtro de datas na sidebar (multiseleção, estilo calendário)
 datas_unicas = sorted(dados_sensor['Data e Hora'].dt.date.unique())
 datas_selecionadas = st.sidebar.multiselect(
@@ -43,7 +44,7 @@ with tabs[0]:
     fig_ph.update_traces(marker=dict(size=8))
     st.plotly_chart(fig_ph, use_container_width=True)
     # Mapa de calor para pH
-    fig_ph_map = px.density_mapbox(
+    fig_ph_map = px.density_map(
         dados_filtrados,
         lat='Latitude',
         lon='Longitude',
@@ -51,7 +52,6 @@ with tabs[0]:
         radius=20,
         center=dict(lat=dados_filtrados['Latitude'].mean(), lon=dados_filtrados['Longitude'].mean()),
         zoom=10,
-        mapbox_style="open-street-map",
         color_continuous_scale='Viridis',
         title='Mapa de Calor de pH'
     )
@@ -72,7 +72,7 @@ with tabs[1]:
     fig_temp.update_traces(marker=dict(size=8))
     st.plotly_chart(fig_temp, use_container_width=True)
     # Mapa de calor para Temperatura
-    fig_temp_map = px.density_mapbox(
+    fig_temp_map = px.density_map(
         dados_filtrados,
         lat='Latitude',
         lon='Longitude',
@@ -80,7 +80,6 @@ with tabs[1]:
         radius=20,
         center=dict(lat=dados_filtrados['Latitude'].mean(), lon=dados_filtrados['Longitude'].mean()),
         zoom=10,
-        mapbox_style="open-street-map",
         color_continuous_scale='RdYlBu',
         title='Mapa de Calor de Temperatura'
     )
@@ -101,7 +100,7 @@ with tabs[2]:
     fig_n.update_traces(marker=dict(size=8))
     st.plotly_chart(fig_n, use_container_width=True)
     # Mapa de calor para Nitrogênio
-    fig_n_map = px.density_mapbox(
+    fig_n_map = px.density_map(
         dados_filtrados,
         lat='Latitude',
         lon='Longitude',
@@ -109,7 +108,6 @@ with tabs[2]:
         radius=20,
         center=dict(lat=dados_filtrados['Latitude'].mean(), lon=dados_filtrados['Longitude'].mean()),
         zoom=10,
-        mapbox_style="open-street-map",
         color_continuous_scale='Greens',
         title='Mapa de Calor de Nitrogênio'
     )
@@ -130,7 +128,7 @@ with tabs[3]:
     fig_p.update_traces(marker=dict(size=8))
     st.plotly_chart(fig_p, use_container_width=True)
     # Mapa de calor para Fósforo
-    fig_p_map = px.density_mapbox(
+    fig_p_map = px.density_map(
         dados_filtrados,
         lat='Latitude',
         lon='Longitude',
@@ -138,7 +136,6 @@ with tabs[3]:
         radius=20,
         center=dict(lat=dados_filtrados['Latitude'].mean(), lon=dados_filtrados['Longitude'].mean()),
         zoom=10,
-        mapbox_style="open-street-map",
         color_continuous_scale='Purples',
         title='Mapa de Calor de Fósforo'
     )
@@ -159,7 +156,7 @@ with tabs[4]:
     fig_k.update_traces(marker=dict(size=8))
     st.plotly_chart(fig_k, use_container_width=True)
     # Mapa de calor para Potássio
-    fig_k_map = px.density_mapbox(
+    fig_k_map = px.density_map(
         dados_filtrados,
         lat='Latitude',
         lon='Longitude',
@@ -167,7 +164,6 @@ with tabs[4]:
         radius=20,
         center=dict(lat=dados_filtrados['Latitude'].mean(), lon=dados_filtrados['Longitude'].mean()),
         zoom=10,
-        mapbox_style="open-street-map",
         color_continuous_scale='Oranges',
         title='Mapa de Calor de Potássio'
     )
